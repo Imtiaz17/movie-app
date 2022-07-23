@@ -39,10 +39,12 @@ export default {
   created() {
     this.keyword = "";
     this.$store.dispatch("setSearchInput", this.keyword);
+    this.$store.dispatch("SET_ENABLE_MEDIA_TYPE",false);
   },
   methods: {
     search() {
       this.$store.dispatch("setSearchInput", this.keyword);
+      this.$store.dispatch("setEnaleMediaType",true);
     },
   },
 };

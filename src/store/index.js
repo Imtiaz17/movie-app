@@ -8,6 +8,7 @@ export default new Vuex.Store({
 		isLoading: false,
 		dataState: "",
 		searchInput: "",
+		enableMediaType: false,
 	},
 	mutations: {
 		SET_IS_LOADING(state, isLoading) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
 		SET_SEARCH_INPUT(state, searchInput) {
 			state.searchInput = searchInput;
 		},
+		SET_ENABLE_MEDIA_TYPE(state, enableMediaType) {
+			state.enableMediaType = enableMediaType;
+		},
 	},
 	actions: {
 		setIsLoading({ commit }, isLoading) {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
 		},
 		setSearchInput({ commit }, searchInput) {
 			commit("SET_SEARCH_INPUT", searchInput);
+		},
+		setEnaleMediaType({ commit }, enableMediaType) {
+			commit("SET_ENABLE_MEDIA_TYPE", enableMediaType);
 		},
 	},
 })

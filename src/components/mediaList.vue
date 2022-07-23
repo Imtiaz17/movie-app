@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <section class="mt-5">
+    <section v-if="enableMediaType">
+      <media-type :media="mediaList" />
+    </section>
+    <section class="mt-5" v-else>
       <h2>What's Popular</h2>
       <v-row class="mt-2">
         <v-col
@@ -9,38 +12,39 @@
           class="d-flex child-flex"
           cols="3"
         >
-          <v-card>
-            <v-img
-              :src="`https://image.tmdb.org/t/p/original/${item.poster_path}`"
-              :lazy-src="`https://image.tmdb.org/t/p/original/${item.poster_path}`"
-              aspect-ratio="1"
-              class="grey lighten-2"
-            >
-              <template v-slot:placeholder>
-                <v-row class="fill-height ma-0" align="center" justify="center">
-                  <v-progress-circular
-                    indeterminate
-                    color="grey lighten-5"
-                  ></v-progress-circular>
-                </v-row>
-              </template>
-            </v-img>
-            <v-card-title>
-              {{ item.title ? item.title : item.name }}
-            </v-card-title>
-            <v-card-subtitle>
-              {{ item.release_date }}
-            </v-card-subtitle>
-          </v-card>
+          <media-item :media="item" />
         </v-col>
       </v-row>
+    </section>
+    <section v-if="isLoading" class="mt-10">
+      <v-row align="center" justify="center">
+        <v-col cols="6">
+          <v-progress-linear
+            color="primary accent-4"
+            indeterminate
+            rounded
+            height="6"
+          ></v-progress-linear>
+        </v-col>
+      </v-row>
+    </section>
+    <section v-if="!isLoading && dataState === 'noData'" class="mt-10">
+      <no-data />
+    </section>
+    <section v-if="!isLoading && dataState === 'error'" class="mt-10">
+      <data-error />
     </section>
   </v-container>
 </template>
 
 <script>
 import api from "@/api/api";
+import mediaType from "./media/mediaType";
+import mediaItem from "./media/mediaItem";
+import noData from "./messages/noData";
+import dataError from "./messages/dataError";
 export default {
+  components: { mediaType, mediaItem, noData, dataError },
   name: "media-list",
   async created() {
     this.fetchMediaList("trending/all/week");
@@ -51,8 +55,22 @@ export default {
     };
   },
   computed: {
+    isLoading: {
+      get: function () {
+        return this.$store.state.isLoading;
+      },
+      set: function (newValue) {
+        this.$store.dispatch("setIsLoading", newValue);
+      },
+    },
     searchInput() {
       return this.$store.state.searchInput;
+    },
+    enableMediaType() {
+      return this.$store.state.enableMediaType;
+    },
+    dataState() {
+      return this.$store.state.dataState;
     },
   },
   watch: {
@@ -81,4 +99,7 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>
 
