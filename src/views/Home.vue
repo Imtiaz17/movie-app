@@ -17,21 +17,21 @@
 
     <v-main>
       <search-filter />
-      <movie-list />
+      <media-list />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import searchFilter from "../components/searchFilter";
-import movieList from "../components/movieList";
+import mediaList from "../components/mediaList";
 
 export default {
   name: "App",
 
   components: {
     searchFilter,
-    movieList,
+    mediaList,
   },
 
   data: () => ({

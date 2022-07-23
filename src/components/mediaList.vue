@@ -41,7 +41,7 @@
 <script>
 import api from "@/api/api";
 export default {
-  name: "movie-list",
+  name: "media-list",
   async created() {
     this.fetchMediaList("trending/all/week");
   },
@@ -49,6 +49,16 @@ export default {
     return {
       mediaList: [],
     };
+  },
+  computed: {
+    searchInput() {
+      return this.$store.state.searchInput;
+    },
+  },
+  watch: {
+    searchInput: function (val) {
+      this.fetchMediaList("search/multi", `&query=${val}`);
+    },
   },
   methods: {
     async fetchMediaList(searchPath, additionalParams = "") {

@@ -10,11 +10,13 @@
           <v-col cols="12">
             <v-text-field
               flat
+              v-model="keyword"
               color="primary"
               background-color="white"
               append-icon="mdi-magnify"
               outlined
               dense
+              @keyup.enter="search()"
               placeholder="Search for a movie, tv show, person......"
               @click:append="search()"
               required
@@ -30,10 +32,18 @@
 export default {
   name: "search-filter",
   data() {
-    return {};
+    return {
+      keyword: "",
+    };
+  },
+  created() {
+    this.keyword = "";
+    this.$store.dispatch("setSearchInput", this.keyword);
   },
   methods: {
-    search() {},
+    search() {
+      this.$store.dispatch("setSearchInput", this.keyword);
+    },
   },
 };
 </script>
