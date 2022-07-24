@@ -15,7 +15,17 @@
             class="d-flex child-flex"
             cols="3"
           >
+          <router-link
+            :to="{
+              name: 'Details',
+              params: {
+                mediaType: item.media_type,
+                mediaId: item.id,
+              },
+            }"
+          >
             <media-item :media="item" />
+          </router-link>
           </v-col>
         </v-row>
       </v-tab-item>

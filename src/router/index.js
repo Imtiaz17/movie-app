@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from "../views/Home.vue";
+import Details from "../views/Details.vue";
 Vue.use(VueRouter)
 
 const routes = [
@@ -9,12 +10,17 @@ const routes = [
 		name: "Home",
 		component: Home,
 	},
+	{
+		path: "/details/:mediaType/:mediaId",
+		name: "Details",
+		component: Details,
+	},
 ];
 
 const router = new VueRouter({
-    mode: 'history',
-    base: '/',
-    routes
-  })
-  
-  export default router
+	mode: 'history',
+	base:"/",
+	routes
+})
+
+export default router
