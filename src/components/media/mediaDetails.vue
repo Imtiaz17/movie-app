@@ -110,10 +110,9 @@
 </template>
 
 <script>
-import personDetails from "./personDetails";
 export default {
   name: "mediaDetails",
-  components: { personDetails },
+  components: { personDetails: () => import("@/components/media/personDetails") },
   props: {
     details: {
       type: Object,

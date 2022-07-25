@@ -5,9 +5,8 @@
 </template>
 
 <script>
-import showDetails from "@/components/showDetails.vue";
 export default {
-  components: { showDetails },
+  components: {  showDetails: () => import('@/components/showDetails') },
   name: "media-details",
   mounted() {
     window.scrollTo(0, 0);

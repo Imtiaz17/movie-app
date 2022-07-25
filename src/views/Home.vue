@@ -14,7 +14,6 @@
       </div>
       <v-spacer></v-spacer>
     </v-app-bar>
-
     <v-main>
       <search-filter />
       <media-list />
@@ -23,19 +22,19 @@
 </template>
 
 <script>
-import searchFilter from "../components/searchFilter";
-import mediaList from "../components/mediaList";
-
 export default {
   name: "App",
-
   components: {
-    searchFilter,
-    mediaList,
+    searchFilter: () => import("@/components/searchFilter"),
+    mediaList: () => import("@/components/mediaList"),
   },
 
   data: () => ({
     //
   }),
+  mounted() {
+    this.$store.dispatch("setSearchInput", "");
+    this.$store.dispatch("setEnaleMediaType", false);
+  },
 };
 </script>

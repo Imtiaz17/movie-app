@@ -92,6 +92,7 @@ export default {
       if (date) {
         return new Date(date).getFullYear();
       }
+      return "";
     },
   },
 };

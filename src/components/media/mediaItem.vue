@@ -40,7 +40,6 @@ export default {
       } else if (this.media.profile_path) {
         return `https://image.tmdb.org/t/p/original/${this.media.profile_path}`;
       }
-
       return "";
     },
     mediaTitle() {

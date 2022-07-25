@@ -49,12 +49,14 @@
 
 <script>
 import api from "@/api/api";
-import mediaType from "./media/mediaType";
-import mediaItem from "./media/mediaItem";
-import noData from "./messages/noData";
-import dataError from "./messages/dataError";
 export default {
-  components: { mediaType, mediaItem, noData, dataError },
+  components: {
+    mediaType: () => import("@/components/media/mediaType"),
+    mediaItem: () => import("@/components/media/mediaItem"),
+    noData: () => import("@/components/messages/noData"),
+    dataError: () => import("@/components/messages/dataError"),
+  },
+
   name: "media-list",
   async created() {
     this.fetchMediaList("trending/all/week");

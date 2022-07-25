@@ -34,9 +34,8 @@
 </template>
 
 <script>
-import mediaItem from "./mediaItem.vue";
 export default {
-  components: { mediaItem },
+  components: { mediaItem: () => import("@/components/media/mediaItem") },
   name: "media-type",
   props: ["media"],
   data() {
